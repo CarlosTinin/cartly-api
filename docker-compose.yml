@@ -1,6 +1,18 @@
 version: '3'
 services:
+  cartly-db:
+    image: mysql:latest    
+    container_name: cartly-db
+    ports:
+      - "3307:3306"
+    env_file:
+      - .env
+    volumes:
+      - mysql_data:/var/lib/mysql
+
   cartly-api:
+    depends_on:
+      - cartly-db
     environment:
       NODE_ENV: development
     build:
@@ -10,7 +22,10 @@ services:
     volumes:
       - ./:/usr/src/app
     expose:
-      - '3000'
+      - "3000"
     ports:
       - "3000:3000"
     command: npm run dev
+
+volumes:
+  mysql_data:
