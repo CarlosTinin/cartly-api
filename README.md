@@ -21,3 +21,7 @@ Built with nodejs using docker
 * Attributes: id (Primary Key), pantry_id (Foreign Key), product_id (Foreign Key), quantity, unit, expire_date.
 ## pantries:
 * Attributes: id (Primary Key), user_id (Foreign Key).
+
+
+# References:
+1. Migrations using Sequelize: <https://sequelize.org/docs/v6/other-topics/migrations/>
