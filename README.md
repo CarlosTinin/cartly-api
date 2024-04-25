@@ -25,3 +25,4 @@ Built with nodejs using docker
 
 # References:
 1. Migrations using Sequelize: <https://sequelize.org/docs/v6/other-topics/migrations/>
+2. Makefile: https://www.gnu.org/software/make/manual/make.html

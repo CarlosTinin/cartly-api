@@ -1,6 +1,6 @@
 const User = require('../models').User;
 
-module.exports = {
+export default class UserController {
   async store(req, res) {
     try {
       const { name, email, password } = req.body;
@@ -14,21 +14,21 @@ module.exports = {
       else
         return res.status(500).json({ data: [], message: "Ocorreu um erro." });
     }
-  },
+  }
 
   async update() {
 
-  },
+  }
 
   async delete() {
 
-  },
+  }
 
   async index(req, res) {
     const users = await User.findAll();
     
     return res.status(200).json({ data: users, message: "Listagem dos usuários."});
-  },
+  }
 
   async findById(req, res) {
     const { id } = req.params;
@@ -40,7 +40,7 @@ module.exports = {
     }
     
     return res.status(200).json({data: user, message: "Usuário recuperado com sucesso!"})
-  },
+  }
 
   async findByName() {
 

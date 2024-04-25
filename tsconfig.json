@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "allowJs": true,
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution":"node",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["./src/*"]
+}

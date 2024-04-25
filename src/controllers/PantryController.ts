@@ -1,7 +1,7 @@
 const Pantry = require('../models').Pantry;
 const User = require('../models').User;
 
-module.exports = {
+export default class PantryController {
   async store(req, res) {
     const { user_id } = req.params;
     const { name } = req.body;
@@ -15,7 +15,7 @@ module.exports = {
     const pantry = await Pantry.create({ name, user_id });
 
     return res.status(201).json({ data: pantry, message: "Despensa criada com sucesso."});
-  },
+  }
 
   async userPantry(req, res) {
     const { user_id } = req.params;

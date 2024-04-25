@@ -1,7 +1,7 @@
 const Product = require('../models').Product;
 const ProductPriceHistory = require('../models').ProductPriceHistory;
 
-module.exports = {
+export default class ProductController {
   async store(req, res) {
     const { name, actual_price, category_id, brand_id } = req.body;
 
@@ -16,7 +16,7 @@ module.exports = {
     }, { include: { association: 'product'} });
 
     return res.status(201).json({ data: product_price_history.product, message: "Produto criado com sucesso!" });
-  },
+  }
 
   async index(req, res) {
     const products = await Product.findAll();
