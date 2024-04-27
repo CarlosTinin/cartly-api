@@ -1,6 +1,6 @@
-# API for the app cart.ly
+# API for the cart.ly app
 
-Built with nodejs using docker
+Built with nodejs+typescript+prisma containerized with docker
 
 # Database Entities:
 ## users: 
@@ -24,5 +24,7 @@ Built with nodejs using docker
 
 
 # References:
-1. Migrations using Sequelize: <https://sequelize.org/docs/v6/other-topics/migrations/>
-2. Makefile: https://www.gnu.org/software/make/manual/make.html
+1. Create ORM DB Structure using Prisma: <https://sequelize.org/docs/v6/other-topics/migrations/>
+- VSCode Extension: Prisma
+2. Makefile: <https://www.gnu.org/software/make/manual/make.html/>
+3. TypeScript: <https://www.typescriptlang.org/docs/handbook/intro.html/>

@@ -1,31 +1,41 @@
-version: '3'
+version: '3.7'
+
 services:
+
   cartly-db:
-    image: mysql:latest    
+    image: postgres:16.2-alpine3.19  
     container_name: cartly-db
     ports:
-      - "3307:3306"
-    env_file:
-      - .env
-    volumes:
-      - mysql_data:/var/lib/mysql
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:      
+      - 'db:/var/lib/postgresql/data'
+    networks:
+      - cartly
 
   cartly-api:
     depends_on:
       - cartly-db
     environment:
-      NODE_ENV: development
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@cartly-db:5432/${POSTGRES_DB}
+      - NODE_ENV=${NODE_ENV}
     build:
       context: .
       dockerfile: Dockerfile.dev
     container_name: cartly-api
     volumes:
       - ./:/usr/src/app
-    expose:
-      - "3000"
     ports:
       - "3000:3000"
-    command: npm run dev
+    networks:
+      - cartly
+
+networks:
+  cartly:
+    driver: bridge
 
 volumes:
-  mysql_data:
+  db:

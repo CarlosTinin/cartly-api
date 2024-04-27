@@ -1,0 +1,137 @@
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  pantries  Pantry[]
+  
+  @@map("users")
+}
+
+model Brand {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  products  Product[]
+
+  @@map("brands")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  products  Product[]
+  
+  @@map("categories")
+}
+
+model Pantry {
+  id        Int           @id @default(autoincrement())
+  name      String?
+  userId    Int           @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products  PantryProduct[]
+
+  @@map("pantries")
+}
+
+model Product {
+  id           Int      @id @default(autoincrement())
+  name         String   
+  brandId      Int?     @map("brand_id")
+  categoryId   Int      @map("category_id")
+  actualPrice  Float    @map("actual_price")
+  image        String?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  brand        Brand?   @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  category     Category @relation(fields: [categoryId], references: [id])
+  priceHistory ProductPriceHistory[]
+  pantries     PantryProduct[]
+  recipies     RecipeIngredient[]     
+
+  @@map("products")
+}
+
+model ProductPriceHistory {
+  id        Int      @id @default(autoincrement())
+  price     Float
+  productId Int      @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@map("product_price_histories")
+}
+
+model Recipe {
+  id           Int     @id @default(autoincrement())
+  title        String
+  description  String?
+  instructions String
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  products     RecipeIngredient[]
+
+  @@map("recipies")
+}
+
+model Unit {
+  id                Int      @id @default(autoincrement())
+  name              String
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  pantriesProducts  PantryProduct[]
+  recipiesProducts  RecipeIngredient[]
+
+  @@map("units")
+}
+
+model PantryProduct {
+  pantryId     Int     @map("pantry_id") 
+  productId    Int     @map("product_id")
+  unitId       Int     @map("unit_id") 
+  quantity     Float
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  pantry       Pantry  @relation(fields: [pantryId], references: [id])
+  product      Product @relation(fields: [productId], references: [id])
+  unit         Unit    @relation(fields: [unitId], references: [id])
+
+  @@id([pantryId, productId])
+  @@map("pantry_products")
+}
+
+model RecipeIngredient {
+  recipeId     Int     @map("recipe_id") 
+  productId    Int     @map("product_id")
+  unitId       Int     @map("unit_id") 
+  quantity     Float
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  recipe       Recipe  @relation(fields: [recipeId], references: [id])
+  product      Product @relation(fields: [productId], references: [id])
+  unit         Unit    @relation(fields: [unitId], references: [id])
+
+  @@id([recipeId, productId])
+  @@map("recipe_ingredients")
+}

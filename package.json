@@ -5,22 +5,23 @@
   "main": "built/server.js",
   "scripts": {
     "start": "node built/server.js",
-    "dev": "nodemon built/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch --env-file .env src/server.ts",
+    "db:migrate": "prisma migrate dev"
   },
   "author": "Carlos Tinin",
   "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.4.1",
-    "express": "^4.18.2",
-    "mysql2": "^3.9.0"
-  },
   "devDependencies": {
-    "nodemon": "^3.0.3",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.7",
     "eslint": "^8.57.0",
+    "prisma": "^5.13.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.3",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2"
   }
 }
