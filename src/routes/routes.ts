@@ -1,19 +1,11 @@
 import { Router } from "express";
-import { index, store, findById } from '../controllers/users';
-import PantryController from "../controllers/PantryController";
-import ProductController from "../controllers/ProductController";
-import { errorHandler } from "../middlewares/errorHandler";
+import userRoutes from "./userRoutes"
 
-export const appRoutes = Router();
+const rootRouter: Router = Router();
 
-appRoutes.get('/', (req, res) => {
-    res.send('Hello World!');
-})
+rootRouter.use('/users/', userRoutes);
 
-// User routes
-appRoutes.get('/users', errorHandler(index));
-appRoutes.get('/users/:id', errorHandler(findById));
-appRoutes.post('/users', errorHandler(store));
+export default rootRouter;
 
 // // Pantry routes
 // const PantryCtrl = new PantryController();
