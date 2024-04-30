@@ -22,8 +22,3 @@ export const errorHandler = (method: Function) => {
     }
   }
 }
-
-// server.use(function(req, res) {
-//   res.status(404);
-//   res.json({ data: [], message: "Rota não encontrada."});
-// });
