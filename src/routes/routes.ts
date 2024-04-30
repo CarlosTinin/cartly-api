@@ -1,18 +1,18 @@
 import { Router } from "express";
-import userRoutes from "./userRoutes"
+import userRoutes from "./userRoutes";
+import productRoutes from "./productRoutes";
+import categoryRoutes from "./categoryRoutes";
+import brandRoutes from "./brandRoutes";
 
 const rootRouter: Router = Router();
 
-rootRouter.use('/users/', userRoutes);
+rootRouter.use('/users', userRoutes);
+rootRouter.use('/products', productRoutes);
+rootRouter.use('/categories', categoryRoutes);
+rootRouter.use('/brands', brandRoutes);
+// server.use(function(req, res) {
+//   res.status(404);
+//   res.json({ data: [], message: "Rota não encontrada."});
+// });
 
 export default rootRouter;
-
-// // Pantry routes
-// const PantryCtrl = new PantryController();
-// appRoutes.get('/users/:user_id/pantry', PantryCtrl.userPantry);
-// appRoutes.post('/users/:user_id/pantry', PantryCtrl.store);
-
-// // Product routes
-// const ProductCtrl = new ProductController();
-// appRoutes.post('/products', ProductCtrl.store);
-// appRoutes.get('/products', ProductCtrl.index);
