@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "./built",
-    "allowJs": true,
+    "strict": true,
     "target": "ES6",
     "module": "CommonJS",
     "moduleResolution":"node",
-    "allowSyntheticDefaultImports": true
+    "isolatedModules": true
   },
   "include": ["./src/*"]
 }

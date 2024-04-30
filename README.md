@@ -24,7 +24,7 @@ Built with nodejs+typescript+prisma containerized with docker
 
 
 # References:
-1. Create ORM DB Structure using Prisma: <https://sequelize.org/docs/v6/other-topics/migrations/>
+1. Create ORM DB Structure using Prisma: <https://www.prisma.io/docs/orm/>
 - VSCode Extension: Prisma
 2. Makefile: <https://www.gnu.org/software/make/manual/make.html/>
 3. TypeScript: <https://www.typescriptlang.org/docs/handbook/intro.html/>
