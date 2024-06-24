@@ -28,4 +28,4 @@ Built with nodejs+typescript+prisma containerized with docker
 - VSCode Extension: Prisma
 2. Makefile: </https://www.gnu.org/software/make/manual/make.html>
 3. TypeScript: </https://www.typescriptlang.org/docs/handbook/intro.html>
-4. Zod: </https://zod.dev>
+4. Create ts schema validations Using Zod: </https://zod.dev>
